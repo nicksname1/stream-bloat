@@ -12,7 +12,95 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-text-size-adjust: 100%;
+}
 
-	border: 1px solid #ff4343;
+* {
+	scrollbar-width: none;
+}
+*::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+}
+
+html {
+	overflow: hidden;
+}
+
+.container {
+	height: 100vh;
+	margin: 0;
+	border-radius: 8px;
+	overflow: hidden; /* important so content is clipped */
+	border: 2px solid #1f2121;
+}
+
+.chat-box {
+	/* display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%; */
+	/* display: flex; */
+	/* flex-direction: column; */
+	/* gap: 10px 0; */
+
+	/* & > div:first-child {
+		max-height: calc(100vh - 200px);
+	} */
+
+	position: absolute;
+	bottom: 10px;
+	padding-inline: 5px;
+	width: 100%;
 	color: aliceblue;
+
+	&:hover {
+		cursor: default;
+	}
+}
+
+.titlebar {
+	/* opacity: 0.5; */
+	border-radius: 8px 8px 0px 0px;
+	overflow: hidden;
+	height: 30px;
+	background: #1f2121;
+	color: aliceblue;
+	user-select: none;
+	display: grid;
+	grid-template-columns: auto max-content;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+.titlebar > .controls {
+	display: flex;
+
+	& > div {
+		width: 30px;
+		/* background-color: aqua; */
+		display: grid;
+		place-items: center;
+	}
+}
+.titlebar button {
+	appearance: none;
+	padding: 0;
+	margin: 0;
+
+	border: none;
+
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 12px;
+	height: 12px;
+	background-color: rgb(72, 72, 72);
+	border-radius: 100%;
+
+	&:hover {
+		background-color: rgb(255, 68, 68);
+		transition: all ease 100ms;
+	}
 }
