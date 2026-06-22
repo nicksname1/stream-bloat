@@ -12,11 +12,13 @@
 	"app": {
 		"windows": [
 			{
-				"title": "stream-bloat",
-				"width": 800,
-				"height": 600,
+				"title": "Stream Chat",
+				"width": 350,
+				"height": 400,
 				"transparent": true,
-				"decorations": false
+				"decorations": false,
+				"maximizable": false,
+				"fullscreen": false
 			}
 		],
 		"security": {
