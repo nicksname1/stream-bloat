@@ -32,6 +32,16 @@
 	}
 }
 
+.chat {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+
+	& img {
+		width: 32px;
+	}
+}
+
 .titlebar {
 	border-radius: 8px 8px 0px 0px;
 	overflow: hidden;

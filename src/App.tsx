@@ -2,16 +2,25 @@ import {useEffect, useRef, useState} from "react"
 import "./App.css"
 import "./preflight.css"
 import tmi from "tmi.js"
+import {getEmoteAsUrl, parseEmotesInMessage} from "tmi-utils"
 type Chat = {
 	source: "twitch" | "youtube"
 	key: string | null
 	author: string
 	message: string
 	color: string | undefined
+	emotes:
+		| {
+				[emoteid: string]: string[]
+		  }
+		| undefined
 }
 
 function App() {
 	const [chat, setChat] = useState<Chat[]>([])
+	const [twitchStatus, setTwitchStatus] = useState<
+		"connected" | "connecting" | "disconnected"
+	>("disconnected")
 	const messagesEndRef = useRef<HTMLDivElement | null>(null)
 
 	const client = new tmi.Client({
@@ -20,6 +29,8 @@ function App() {
 
 	client.connect()
 
+	client.on("connected", () => setTwitchStatus("connected"))
+
 	client.on("message", (_channel, tags, message, _self) => {
 		const chat: Chat = {
 			source: "twitch",
@@ -27,13 +38,39 @@ function App() {
 			author: `${tags["display-name"]}`,
 			message: message,
 			color: tags.color,
+			emotes: tags.emotes,
 		}
 
 		setChat((prev) => {
 			if (prev.some((x) => x.key === chat.key)) return prev
 			return [...prev, chat]
 		})
+
+		if (chat.emotes) console.log(restoredMessage(chat.emotes, chat.message))
 	})
+
+	const restoredMessage = (
+		emotes: Record<string, string[]>,
+		message: string
+	) => {
+		const splitMessage = parseEmotesInMessage(emotes, message)
+
+		const x = splitMessage.map((i) => {
+			const {type, value, raw} = i
+
+			if (type === "emote") {
+				const url = getEmoteAsUrl(value)
+				return (
+					<img
+						src={url}
+						alt={raw}
+					/>
+				)
+			} else return <span>{value}</span>
+		})
+
+		return x
+	}
 
 	useEffect(() => {
 		messagesEndRef.current?.scrollIntoView({behavior: "smooth"})
@@ -42,6 +79,7 @@ function App() {
 	return (
 		<main className="container">
 			<div className="chat-box">
+				{twitchStatus === "connected" && "Connected to Twitch"}
 				{chat.map((i, index) => {
 					return (
 						<div key={index}>
@@ -68,17 +106,20 @@ function App() {
 									</svg>
 								)}
 							</span>
-							<div>
-								<span
-									style={{
-										color: i.color,
-										fontWeight: "bold",
-									}}>
-									{i.author}
-								</span>
-								{": "}
-								<span>{i.message}</span>
-							</div>
+
+							<span
+								style={{
+									color: i.color,
+									fontWeight: "bold",
+								}}>
+								{i.author}
+							</span>
+							{": "}
+							<span className="chat">
+								{i.emotes
+									? restoredMessage(i.emotes, i.message)
+									: i.message}
+							</span>
 						</div>
 					)
 				})}
