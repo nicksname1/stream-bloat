@@ -14,7 +14,9 @@
 			{
 				"title": "Stream Chat",
 				"width": 350,
+				"minWidth": 200,
 				"height": 400,
+				"minHeight": 300,
 				"transparent": true,
 				"decorations": false,
 				"maximizable": false,
