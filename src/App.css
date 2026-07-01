@@ -95,3 +95,30 @@
 		place-items: center;
 	}
 }
+
+#settingsContainer {
+	height: 100dvh;
+	padding: 1rem;
+	background: #1f2121;
+	color: aliceblue;
+
+	& .input {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin-bottom: 2rem;
+	}
+	& input {
+		border: 1px solid aliceblue;
+		border-radius: 0.5rem;
+		padding: 4px;
+	}
+	& button[type="submit"] {
+		background: #087979;
+		border-radius: 0.5rem;
+		padding: 4px 1rem;
+		cursor: pointer;
+		text-transform: uppercase;
+		font-weight: bolder;
+	}
+}
