@@ -1,6 +1,29 @@
 import {getCurrentWindow} from "@tauri-apps/api/window"
+import {WebviewWindow} from "@tauri-apps/api/webviewWindow"
+
 export const Titlebar = () => {
 	const appWindow = getCurrentWindow()
+
+	const openSettings = async () => {
+		const existing = await WebviewWindow.getByLabel("settings")
+		if (existing) {
+			existing.setFocus()
+			return
+		}
+
+		new WebviewWindow("settings", {
+			url: "index.html#settings",
+			title: "Settings",
+			width: 500,
+			minWidth: 500,
+			height: 360,
+			minHeight: 360,
+			center: true,
+			maximizable: false,
+			// decorations: false,
+			// transparent: true,
+		})
+	}
 
 	return (
 		<div className="titlebar">
@@ -8,7 +31,8 @@ export const Titlebar = () => {
 			<div className="controls">
 				<button
 					id="settings"
-					title="Settings">
+					title="Settings"
+					onClick={openSettings}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="15px"

@@ -4,6 +4,8 @@ import "./preflight.css"
 import tmi from "tmi.js"
 import {getEmoteAsUrl, parseEmotesInMessage} from "tmi-utils"
 import {Titlebar} from "./titlebar/titlebar"
+import {SettingsWindow} from "./titlebar/settingsWindow"
+
 type Chat = {
 	source: "twitch" | "youtube"
 	key: string | null
@@ -73,11 +75,15 @@ function App() {
 		return x
 	}
 
+	const isSettings = window.location.hash === "#settings"
+
 	useEffect(() => {
 		messagesEndRef.current?.scrollIntoView({behavior: "smooth"})
 	}, [chat])
 
-	return (
+	return isSettings ? (
+		<SettingsWindow />
+	) : (
 		<>
 			<Titlebar />
 			<main className="container">
