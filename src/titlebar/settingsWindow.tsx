@@ -18,6 +18,7 @@ export const SettingsWindow = () => {
 	useEffect(() => {
 		;(async () => {
 			const x = await getKey<string>("twitchChannel")
+
 			if (x !== undefined) {
 				setTwitchChannel(x)
 			}
