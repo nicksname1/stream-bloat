@@ -9,7 +9,15 @@
 .container {
 	height: 100vh;
 	border-radius: 8px;
-	border: 2px solid #1f2121;
+
+	&::before {
+		content: "";
+		position: fixed;
+		border: 2px solid #1f2121;
+		width: 100%;
+		height: calc(100% - 30px);
+		top: 30px;
+	}
 }
 
 .chat-box {
