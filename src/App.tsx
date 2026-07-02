@@ -48,8 +48,6 @@ function App() {
 			if (prev.some((x) => x.key === chat.key)) return prev
 			return [...prev, chat]
 		})
-
-		if (chat.emotes) console.log(restoredMessage(chat.emotes, chat.message))
 	})
 
 	const restoredMessage = (
