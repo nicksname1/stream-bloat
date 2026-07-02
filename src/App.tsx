@@ -5,6 +5,7 @@ import tmi from "tmi.js"
 import {getEmoteAsUrl, parseEmotesInMessage} from "tmi-utils"
 import {Titlebar} from "./titlebar/titlebar"
 import {SettingsWindow} from "./titlebar/settingsWindow"
+import {getKey} from "./persistentStore"
 
 type Chat = {
 	source: "twitch" | "youtube"
@@ -20,6 +21,7 @@ type Chat = {
 }
 
 function App() {
+	const [twitchChannel, setTwitchChannel] = useState<string>("")
 	const [chat, setChat] = useState<Chat[]>([])
 	const [twitchStatus, setTwitchStatus] = useState<
 		"connected" | "connecting" | "disconnected"
@@ -27,7 +29,7 @@ function App() {
 	const messagesEndRef = useRef<HTMLDivElement | null>(null)
 
 	const client = new tmi.Client({
-		channels: ["nickchunk"],
+		channels: [twitchChannel],
 	})
 
 	client.connect()
@@ -79,6 +81,16 @@ function App() {
 		messagesEndRef.current?.scrollIntoView({behavior: "smooth"})
 	}, [chat])
 
+	useEffect(() => {
+		;(async () => {
+			const x = await getKey<string>("twitchChannel")
+
+			if (x !== undefined) {
+				setTwitchChannel(x)
+			}
+		})()
+	}, [])
+
 	return isSettings ? (
 		<SettingsWindow />
 	) : (
@@ -86,7 +98,8 @@ function App() {
 			<Titlebar />
 			<main className="container">
 				<div className="chat-box">
-					{twitchStatus === "connected" && "Connected to Twitch"}
+					{twitchStatus === "connected" && "Connected to Twitch "}
+					{twitchChannel}
 					{chat.map((i, index) => {
 						return (
 							<div key={index}>
@@ -113,7 +126,6 @@ function App() {
 										</svg>
 									)}
 								</span>
-
 								<span
 									style={{
 										color: i.color,
