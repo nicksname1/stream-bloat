@@ -20,6 +20,7 @@ export const Titlebar = () => {
 			minHeight: 360,
 			center: true,
 			maximizable: false,
+			minimizable: false,
 			// decorations: false,
 			// transparent: true,
 		})

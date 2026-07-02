@@ -1,7 +1,28 @@
-// import {getCurrentWebviewWindow} from "@tauri-apps/api/webviewWindow"
+import "../styles/settings.css"
+import {getKey, setKey} from "../persistentStore"
+import {useEffect, useState, type SyntheticEvent} from "react"
 
 export const SettingsWindow = () => {
-	// const closeSelf = () => getCurrentWebviewWindow().close()
+	const [twitchChannel, setTwitchChannel] = useState<string>("")
+
+	const onSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
+		e.preventDefault()
+
+		const formData = new FormData(e.currentTarget)
+		const formJson = Object.fromEntries(formData.entries())
+
+		setTwitchChannel(formJson.twitchChannel as string)
+		await setKey("twitchChannel", formJson.twitchChannel as string)
+	}
+
+	useEffect(() => {
+		;(async () => {
+			const x = await getKey<string>("twitchChannel")
+			if (x !== undefined) {
+				setTwitchChannel(x)
+			}
+		})()
+	}, [])
 
 	return (
 		<main id="settingsContainer">
