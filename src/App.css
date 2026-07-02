@@ -9,13 +9,11 @@
 .container {
 	height: 100vh;
 	border-radius: 8px;
-	overflow: hidden;
 	border: 2px solid #1f2121;
 }
 
 .chat-box {
-	position: absolute;
-	bottom: 10px;
+	margin-top: 48px;
 	padding-inline: 5px;
 	width: 100%;
 	color: aliceblue;
