@@ -78,7 +78,13 @@ function App() {
 	const isSettings = window.location.hash === "#settings"
 
 	useEffect(() => {
-		messagesEndRef.current?.scrollIntoView({behavior: "smooth"})
+		const el = messagesEndRef.current
+		if (!el) return
+
+		const rect = el.getBoundingClientRect()
+		const inView = rect.top >= 0 && rect.bottom <= window.innerHeight
+
+		if (!inView) el.scrollIntoView({behavior: "smooth"})
 	}, [chat])
 
 	useEffect(() => {
