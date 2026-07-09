@@ -1,4 +1,3 @@
-import "../styles/settings.css"
 import {getKey, setKey} from "../persistentStore"
 import {useEffect, useState, type SyntheticEvent} from "react"
 
