@@ -1,7 +1,31 @@
-# Tauri + React + Typescript
+# Stream Bloat
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+<p align="center">
+<img src='./src/assets/app-icon.png' height="128" />
+</p>
 
-## Recommended IDE Setup
+Read Twitch Chat while playing Minecraft or whatever games you play.
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+I started this project because I didn't want to keep looking on my phone while streaming, and I don't have 2 monitors or a phone stand. So, yeah.
+
+## Installation
+
+See the [Release Page](https://github.com/nicksname1/stream-bloat/releases), and the download the right package for your system.
+
+Available for **linux**. **Windows** and **Mac** was not tested.
+
+### Usage
+
+The window must be pinned as **"Always on Top"**.
+
+- **Linux:** <br /> This can be done by opening the window menu (<span><kbd>alt</kdb> + <kdb>space</kdb></span>).
+- **Windows:** <br /> There is a guide here: [How To Geek](https://www.howtogeek.com/196958/ways-to-make-a-window-always-on-top-on-windows/)
+
+### Future Plans
+
+- Support for YouTube stream chat
+- Better documentation
+
+### Contributing
+
+Report bugs, make suggestions, or write some code. All contributions are welcome.
