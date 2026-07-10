@@ -2,7 +2,8 @@
 name = "stream-bloat"
 version = "0.1.0"
 description = "Read stream chat while playing your game"
-authors = ["you"]
+authors = ["NickChunk"]
+repository = "https://github.com/nicksname1/stream-bloat"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
